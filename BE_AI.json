@@ -1,0 +1,51 @@
+{
+  "cluster_state": {
+    "time_index": 13,
+    "day_of_week": 1,
+    "tou_price": 174.0,
+    "grid_limit_w": 200.0,
+    "transfer_enabled": true
+  },
+
+  "stations": [
+    {
+      "station_id": 0,
+
+      "current_state": {
+        "demand_count": 2,      // 해당 충전소에서 필요한 충전기 수
+
+        "chargers": [
+          {
+            "charger_id": 1,
+            "type": "fast",          // fast / slow
+            "power_demand_w": 7.0,   // 요구 전력
+            "is_active": true
+          },
+          {
+            "charger_id": 2,
+            "type": "slow",
+            "power_demand_w": 3.0,
+            "is_active": true
+          }
+        ],
+
+        "power": {
+          "p_pv": 12.5,     // 현재 충전소의 pv 발전량
+          "p_load": 8.2,    // 현재 충전소에서 전기를 얼마나 사용하고 있는지
+          "p_ess": -2.1,
+          "p_grid": 4.5,
+          "p_tr": 0.0
+        },
+
+        "soc": 0.45
+      },
+
+      "constraints": {
+        "soc_min": 0.2,
+        "soc_max": 0.9,
+        "ess_max_charge": 15.0,
+        "ess_max_discharge": 15.0
+      }
+    }
+  ]
+}

@@ -1,0 +1,197 @@
+{
+  "header": {
+    "request_id": "rl-20260324-145502-0001", // 2번 요청과 동일한 추적 ID
+    "message_type": "RL_DECISION_PROCESS",   // 메시지 종류: AI 내부 처리 단계
+    "api_version": "1.0",                    // 내부 처리 버전
+    "source_system": "ai-server",            // 송신 주체: AI 서버
+    "target_system": "ai-server-internal",   // 수신 주체: AI 서버 내부 파이프라인
+    "timestamp": "2026-03-24T14:55:02Z",     // AI 서버가 요청을 받은 시각
+    "model_type": "SAC",                     // 사용 RL 모델 종류
+    "inference_device": "cpu"                // 추론 장치(cpu 또는 gpu)
+  },
+
+  "payload": {
+    "input_processing": {
+      "received_timestamp": "2026-03-24T14:55:02Z", // 실제 요청 수신 시각
+
+      "validation": {
+        "schema_check": true,                // 요청 JSON 형식(schema) 검증 통과 여부
+        "required_field_check": true,        // 필수 필드 존재 여부 검증
+        "range_check": true,                 // 값 범위 검증 (예: soc 0.0 ~ 1.0)
+        "station_count_check": true,         // station_count와 실제 stations 길이 일치 여부
+        "error_code_check": true             // 비정상 충전소(error_code ≠ 0) 처리 가능 여부
+      }
+    },
+
+    "ml_stage": {
+      "forecast_update_needed": false,       // 예측값 재계산 필요 여부
+      "pv_model": "xgboost_pv_v1",           // 태양광 발전량 예측 모델명
+      "load_model": "lightgbm_load_v1",      // 부하 예측 모델명
+
+      "input_features": [
+        "time_index",                        // 현재 시간 인덱스
+        "day_of_week",                       // 요일
+        "tou_price",                         // 시간대 요금
+        "soc",                               // 현재 ESS SOC
+        "p_pv",                              // 현재 태양광 발전 전력
+        "p_load",                            // 현재 부하
+        "p_grid",                            // 현재 계통 전력
+        "demand_count"                       // 현재 충전 수요 개수
+      ],
+
+      "ml_output": {
+        "pv_pred_w_next": [12.8, 13.1, 13.6, 12.9],  // 미래 N step 태양광 발전량 예측
+        "load_pred_w_next": [8.5, 8.9, 9.7, 10.1],   // 미래 N step 부하 예측
+        "demand_flag_pred_next": [1, 1, 0, 1]        // 미래 N step 수요 발생 예측
+      }
+    },
+
+    "state_builder": {
+      "global_state_vector": [
+        0.54,  // 정규화된 시간 정보
+        0.58,  // 정규화된 TOU 요금
+        0.45,  // 대표 SOC 또는 집계 SOC
+        0.25,  // 대표 PV 발전량
+        0.16,  // 대표 부하
+        -0.14, // 대표 ESS 전력
+        0.09,  // 대표 계통 전력
+        0.0,   // 대표 전력 융통량
+        0.4    // 대표 수요 비율
+      ],
+
+      "station_state_vectors": [
+        {
+          "station_id": 0,                   // 해당 상태 벡터가 어떤 충전소의 것인지 식별
+          "state_vector": [
+            0.54,  // time_norm
+            0.45,  // soc_norm
+            0.25,  // p_pv_norm
+            0.16,  // p_load_norm
+            -0.14, // p_ess_norm
+            0.09,  // p_grid_norm
+            0.0,   // p_tr_norm
+            0.58,  // tou_price_norm
+            0.4    // demand_count_norm
+          ]
+        },
+        {
+          "station_id": 1,
+          "state_vector": [
+            0.54,
+            0.52,
+            0.2,
+            0.19,
+            0.1,
+            0.05,
+            0.0,
+            0.58,
+            0.4
+          ]
+        }
+
+        // station_id = 2 ~ 4도 동일 구조로 생성됨
+      ]
+    },
+
+    "rl_stage": {
+      "rl_model": "sac_scheduler_v1",        // SAC 기반 스케줄링 모델명
+
+      "raw_action": [
+        {
+          "station_id": 0,                   // 행동이 적용될 충전소 ID
+          "ess_control": 0.52,               // ESS 제어 원시값(-1.0 ~ 1.0), +면 충전 방향
+          "pv_priority": 0.81,               // 태양광 우선 사용 점수(0.0 ~ 1.0)
+          "grid_dependency": 0.33,           // 계통 전력 의존도(0.0 ~ 1.0)
+          "transfer_ratio": 0.0              // 전력 융통 비율(0.0 ~ 1.0 또는 내부 정의 범위)
+        },
+        {
+          "station_id": 1,
+          "ess_control": -0.31,              // -면 ESS 방전 방향
+          "pv_priority": 0.74,
+          "grid_dependency": 0.21,
+          "transfer_ratio": 0.15
+        }
+      ]
+    },
+
+    "action_postprocess": {
+      "scaled_action": [
+        {
+          "station_id": 0,
+          "ess_control_w": 7.8,              // 실제 적용 전력으로 변환된 ESS 제어값
+          "ess_mode": "charge",              // charge: 충전, discharge: 방전, idle: 유지
+          "pv_priority_score": 0.81,         // 태양광 우선 사용 점수
+          "grid_dependency_w": 4.9,          // 실제 계통 구매 전력
+          "transfer_target_station_id": null,// 전력 융통 대상 충전소 ID, 없으면 null
+          "transfer_power_w": 0.0            // 실제 전력 융통량
+        },
+        {
+          "station_id": 1,
+          "ess_control_w": -4.7,
+          "ess_mode": "discharge",
+          "pv_priority_score": 0.74,
+          "grid_dependency_w": 3.1,
+          "transfer_target_station_id": 0,   // station 1 -> station 0 으로 전력 전달
+          "transfer_power_w": 2.2
+        }
+      ],
+
+      "constraint_check": [
+        {
+          "station_id": 0,
+          "soc_limit_ok": true,              // SOC 하한/상한 위반 여부
+          "power_limit_ok": true,            // ESS 출력 상한 위반 여부
+          "transfer_limit_ok": true,         // 전력 융통 상한 위반 여부
+          "error_state_ok": true             // 고장 상태일 때 행동 적용 가능 여부
+        },
+        {
+          "station_id": 1,
+          "soc_limit_ok": true,
+          "power_limit_ok": true,
+          "transfer_limit_ok": true,
+          "error_state_ok": true
+        }
+      ],
+
+      "final_action": [
+        {
+          "station_id": 0,
+          "ess_control_w": 7.8,              // 제약조건 적용 후 최종 ESS 제어 전력
+          "ess_mode": "charge",
+          "pv_priority_score": 0.81,
+          "grid_dependency_w": 4.9,
+          "transfer_target_station_id": null,
+          "transfer_power_w": 0.0
+        },
+        {
+          "station_id": 1,
+          "ess_control_w": -4.7,
+          "ess_mode": "discharge",
+          "pv_priority_score": 0.74,
+          "grid_dependency_w": 3.1,
+          "transfer_target_station_id": 0,
+          "transfer_power_w": 2.2
+        }
+      ]
+    },
+
+    "reward_calc": {
+      "reward_total": 10.2,                  // 전체 RL 보상값
+
+      "reward_detail": {
+        "pv_use_reward": 3.8,                // 태양광 활용 증가에 대한 보상
+        "cost_saving_reward": 4.1,           // 전기요금 절감 효과 보상
+        "soc_stability_reward": 1.7,         // ESS SOC 안정 구간 유지 보상
+        "transfer_efficiency_reward": 1.2,   // 충전소 간 전력 융통 효율 보상
+        "constraint_penalty": -0.4,          // 제약조건 위반 또는 경계 접근 패널티
+        "grid_overuse_penalty": -0.2         // 계통 전력 과다 사용 패널티
+      }
+    }
+  },
+
+  "status": {
+    "is_success": true,                      // 내부 RL 처리 성공 여부
+    "error_code": 0,                         // 0: 정상, 1: 입력검증실패, 2: 예측실패, 3: RL추론실패, 4: 후처리실패
+    "message": "internal RL pipeline completed successfully" // 내부 처리 결과 메시지
+  }
+}

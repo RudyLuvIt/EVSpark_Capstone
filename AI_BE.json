@@ -1,0 +1,45 @@
+{
+  "request_id": "rl-20260324-145502-0001",
+  "timestamp": "2026-03-24T14:55:03Z",
+
+  "station_actions": [
+    {
+      "station_id": 0,
+
+      "ess_control": {
+        "mode": "charge",          // charge | discharge | idle
+        "power_w": 7.8             // ESS 충/방전 전력 (W)
+      },
+
+      "grid_usage_w": 4.9,         // 계통에서 사용할 전력 (W)
+
+      "transfer": {
+        "target_station_id": null, // 전력 보낼 대상 (없으면 null)
+        "power_w": 0.0             // 전력 이동량 (W)
+      },
+
+      "power_balance": {
+        "expected_p_load_w": 10.0, // 총 부하 예상
+        "expected_p_pv_w": 12.5,   // 태양광 사용량
+        "expected_p_grid_w": 4.9   // 계통 사용량
+      },
+
+      "safety_check": {
+        "soc_valid": true,
+        "power_valid": true
+      }
+    }
+  ],
+
+  "cluster_summary": {
+    "total_grid_usage_w": 8.0,
+    "total_transfer_w": 2.2,
+    "estimated_total_cost": 1392.0
+  },
+
+  "status": {
+    "is_success": true,
+    "error_code": 0,
+    "message": "RL decision generated successfully"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "header": {
+    "station_id": 0,           // 0: 실물 보드, 1~4: 가상 시뮬레이터 충전소
+    "is_physical": true,       // 실물 보드 여부 플래그
+    "timestamp": "2026-03-24T14:55:01Z"
+  },
+  "payload": {
+    "charger_status": [                       // 충전기별 수요 플래그
+      {"charger_id": 1, "has_demand": true},  // 차량 연결 및 충전 요청 중
+      {"charger_id": 2, "has_demand": false}, // 수요 없는 상태
+      {"charger_id": 3, "has_demand": true},
+      {"charger_id": 4, "has_demand": false},
+      {"charger_id": 5, "has_demand": false}
+    ],
+    "power_metrics_w": {
+      "p_pv": 12.5,            // 태양광 발전량 (Scaled)
+      "p_load": 8.2,           // 현재 충전소에서 얼마나 전기를 사용하고 있는지
+      "p_ess": -2.1,           // ESS 충방전 (+:충전, -:방전). 현재 ESS가 에너지를 충방전하는지
+      "p_grid": 4.5,           // 외부 전력망을 통해 사오는 전력
+      "p_tr": 0.0              // 타 스테이션 간 움직이는 전력
+    },
+    "state_of_charge": {
+      "soc": 0.45,             // 현재 배터리 잔량 (0.0 ~ 1.0)
+      "capacity_wh": 50.0      // 스테이션별 배터리 용량 (Wh)
+    }
+  },
+  "status": {
+    "is_active": true,
+    "error_code": 0            // 0: 정상, 1: 통신장애, 2: 센서오류 등
+  }
+}
