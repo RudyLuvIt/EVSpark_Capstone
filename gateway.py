@@ -1,20 +1,22 @@
 import time
 import json
 import csv
+import ast
 import paho.mqtt.client as mqtt
 import numpy as np
 import threading
 import random
+import payload_builder
 
 # ==========================================
 # 1. 설정
 # ==========================================
 # 로컬(하드웨어 제어) MQTT 설정
-LOCAL_MQTT_BROKER = "192.168.219.114"
+LOCAL_MQTT_BROKER = "100.90.73.122"
 LOCAL_MQTT_PORT = 1883
 
 # 클라우드(백엔드 AWS) MQTT 설정
-AWS_MQTT_BROKER = "43.201.17.179" 
+AWS_MQTT_BROKER = "3.38.103.218" 
 AWS_MQTT_PORT = 1883
 
 # MQTT 토픽 설정
@@ -45,11 +47,30 @@ last_sent_mode_0 = None           # 아두이노로 마지막으로 전송한 �
 
 # CSV 데이터 로드
 all_csv_data = {}
+sim_daily_requests = {}
+
+def load_daily_requests():
+    global sim_daily_requests
+    try:
+        with open("Sim_Daily_Requests.csv", "r", encoding="utf-8") as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                step_idx = int(row["step_idx"])
+                parsed_row = {}
+                for k, v in row.items():
+                    if k.startswith("past_") or k.startswith("forecast_"):
+                        parsed_row[k] = ast.literal_eval(v)
+                    else:
+                        parsed_row[k] = v
+                sim_daily_requests[step_idx] = parsed_row
+        print(f"✅ Daily Requests 로드 완료: 총 {len(sim_daily_requests)}일치")
+    except Exception as e:
+        print(f"❌ Daily Requests 로드 실패: {e}")
 
 def load_csv_data():
     global all_csv_data
     try:
-        with open("Capstone_Data_Sim_Per_Second_Natural.csv", "r") as f:
+        with open("Sim_Live_Data.csv", "r") as f:
             reader = csv.DictReader(f)
             for row in reader:
                 raw_step = int(row["step"])
@@ -72,28 +93,52 @@ def load_csv_data():
                 if day_key not in all_csv_data:
                     all_csv_data[day_key] = {
                         "pv": np.zeros((24, REAL_TIME_PER_STEP, NUM_STATIONS)),
-                        "flags": np.zeros((24, REAL_TIME_PER_STEP, NUM_STATIONS, 5), dtype=int)
+                        "flags": np.zeros((24, REAL_TIME_PER_STEP, NUM_STATIONS, 5), dtype=int),
+                        "weather": [[{} for _ in range(REAL_TIME_PER_STEP)] for _ in range(24)]
                     }
                     
                 for st in range(NUM_STATIONS):
                     all_csv_data[day_key]["pv"][step, sec_idx, st] = float(row[f"pv_{st}"])
                     for c in range(5):
                         all_csv_data[day_key]["flags"][step, sec_idx, st, c] = int(row[f"s{st}_c{c+1}"])
+                        
+                all_csv_data[day_key]["weather"][step][sec_idx] = {
+                    "temperature_c": float(row.get("temperature_c", 0.0)),
+                    "humidity_pct": float(row.get("humidity_pct", 0.0)),
+                    "cloud_amount": float(row.get("cloud_amount", 0.0)),
+                    "precipitation_mm": float(row.get("precipitation_mm", 0.0)),
+                    "snow_cm": float(row.get("snow_cm", 0.0)),
+                    "wind_speed_ms": float(row.get("wind_speed_ms", 0.0)),
+                    "wind_direction_deg": float(row.get("wind_direction_deg", 0.0)),
+                    "pressure_hpa": float(row.get("pressure_hpa", 0.0)),
+                    "sea_level_pressure_hpa": float(row.get("sea_level_pressure_hpa", 0.0)),
+                    "solar_radiation_mj_m2": float(row.get("solar_radiation_mj_m2", 0.0)),
+                    "current_PTY": float(row.get("current_PTY", 0.0))
+                }
         print(f"✅ CSV 데이터 로드 완료: 총 {len(all_csv_data)}일 데이터 (초단위 샘플링 적용 완료)")
     except Exception as e:
         print(f"❌ CSV 로드 실패: {e}")
 
 load_csv_data()
+load_daily_requests()
+
+# get_requests_for_step removed as we now send the full row at step 22
 
 # ==========================================
 # 3. MQTT 콜백 (로컬 및 AWS)
 # ==========================================
 # --- 로컬 (하드웨어 제어용) ---
-def on_connect_local(client, userdata, flags, reason_code, properties):
+def on_connect_local(client, userdata, flags, reason_code, properties=None):
     if reason_code == 0:
         print(f"✅ [로컬] 하드웨어 제어용 브로커 연결 성공!")
         client.subscribe("smartgrid/sensor")
         print(f"📡 [로컬] 'smartgrid/sensor' 토픽에서 센서 데이터 구독 시작...")
+        
+        # A, B 보드 모두 초기 상태(꺼짐)로 초기화
+        # 이전 실행에서 릴레이가 켜진 채 남아 있을 경우를 방지
+        client.publish(TOPIC_CONTROL, json.dumps({"target": "A", "cmd": "O"}))
+        client.publish(TOPIC_CONTROL, json.dumps({"target": "B", "cmd": "O"}))
+        print(f"🔌 [초기화] A, B 보드 릴레이를 꺼짐(O) 상태로 초기화했습니다.")
     else:
         print(f"❌ [로컬] 연결 실패, 코드: {reason_code}")
 
@@ -157,8 +202,8 @@ def on_message_aws(client, userdata, msg):
                         hour = plan.get("hour")
                         if hour is not None and 0 <= hour < 24:
                             # 단위 변환: kW -> W
-                            power_w = float(plan.get("ess_power", 0.0)) * 1000.0
-                            grid_usage_w = float(plan.get("grid_usage", 0.0)) * 1000.0
+                            power_w = float(plan.get("ess_power_kw", 0.0)) * 1000.0
+                            grid_usage_w = float(plan.get("grid_usage_kw", 0.0)) * 1000.0
                             mode = plan.get("ess_mode", "idle")
                             
                             transfer_power_kw = sum(t.get("transfer_power_kw", 0.0) for t in plan.get("transfer", []))
@@ -198,9 +243,11 @@ def telemetry_loop(aws_client, local_client):
         if day_key in all_csv_data:
             current_pv = all_csv_data[day_key]["pv"][current_step][sec_idx]
             current_flags = all_csv_data[day_key]["flags"][current_step][sec_idx]
+            current_weather = all_csv_data[day_key]["weather"][current_step][sec_idx]
         else:
             current_pv = np.zeros(NUM_STATIONS)
             current_flags = np.zeros((NUM_STATIONS, 5), dtype=int)
+            current_weather = {}
             
         # 현재 활성화된 스케줄에서 이번 스텝의 행동 리스트 추출 (없으면 대기 상태로 빈 딕셔너리 반환)
         actions_for_step = active_schedule.get(current_step, {})
@@ -220,10 +267,16 @@ def telemetry_loop(aws_client, local_client):
                         mode = "idle"
                         p_w = 0.0
                     
-                    # 단순히 charge면 더하고 discharge면 빼서 반영
+                    # 하드웨어 최대 충방전 전력으로 클램프 (AI가 큰 kW 값을 내려보내도 실제 배터리 한계 이내로 제한)
+                    if "charge" in mode:
+                        p_w = min(p_w, E_CH_MAX)
+                    elif "discharge" in mode:
+                        p_w = min(p_w, E_DIS_MAX)
+                    
+                    # charge면 더하고 discharge면 빼서 반영
                     change = p_w if "charge" in mode else -p_w if "discharge" in mode else 0.0
                     
-                    # 10초(1시간)에 걸쳐 나누어서 SoC 추가 후, 간단히 np.clip으로 상하한선을 싹둑 자름
+                    # 10초(1시간)에 걸쳐 나누어서 SoC 업데이트: ΔSoC = P[W] × 1[h] / E_C[Wh] / steps
                     current_soc[st_id] = np.clip(current_soc[st_id] + (change / E_C[st_id] / REAL_TIME_PER_STEP), SOC_MIN, SOC_MAX)
 
         # 2. 5개 스테이션의 상태 데이터를 하나의 리스트로 조립
@@ -261,6 +314,12 @@ def telemetry_loop(aws_client, local_client):
                 elif "discharge" in ess_mode and current_soc[i] <= SOC_MIN:
                     ess_mode = "idle"
                     raw_ess_w = 0.0
+                
+                # 텔레메트리 표기용도 동일하게 클램프 적용
+                if "charge" in ess_mode:
+                    raw_ess_w = min(raw_ess_w, E_CH_MAX)
+                elif "discharge" in ess_mode:
+                    raw_ess_w = min(raw_ess_w, E_DIS_MAX)
                 
                 # 방전일 때 양수(+), 충전일 때 음수(-) 표기
                 p_ess_i = raw_ess_w if "discharge" in ess_mode else -raw_ess_w if "charge" in ess_mode else 0.0
@@ -323,8 +382,28 @@ def telemetry_loop(aws_client, local_client):
             stations_data.append(station_info)
 
         # 3. AWS로 1초마다 데이터 Publish
-        telemetry_payload = {"stations": stations_data}
-        aws_client.publish(TOPIC_TELEMETRY, json.dumps(telemetry_payload))
+        telemetry_payload = {
+            "stations": stations_data,
+            "weather": current_weather
+        }
+        
+        if current_step == 22 and sec_idx == 0 and current_day_idx in sim_daily_requests:
+            try:
+                ai_request_payload = payload_builder.build_ai_server_request(
+                    current_day_idx, 
+                    current_step, 
+                    sim_daily_requests, 
+                    stations_data
+                )
+                aws_client.publish(TOPIC_TELEMETRY, json.dumps(ai_request_payload))
+                print(f"📡 [AI 서버 요청] 22시 정각, 전체 스케줄 요청 페이로드를 전송했습니다.")
+            except Exception as e:
+                print(f"❌ [AI 서버 요청 실패] 페이로드 생성 오류: {e}")
+                aws_client.publish(TOPIC_TELEMETRY, json.dumps(telemetry_payload))
+        else:
+            aws_client.publish(TOPIC_TELEMETRY, json.dumps(telemetry_payload))
+            
+        print(f"[{time.strftime('%H:%M:%S')}] 📡 데이터 전송 (시뮬레이션 시간: day{current_day_idx} {current_step}시 {sec_idx * 6}분)")
         
         # 1초 경과 처리
         sec_idx = min(sec_idx + 1, REAL_TIME_PER_STEP - 1)
@@ -347,14 +426,13 @@ def main_step_loop(local_client):
         print(f"\n=== [시뮬레이션 day{current_day_idx}] 24시간 스케줄(Action) 대기 중 ===")
         
         # 백엔드로부터 이번 날의 24시간 스케줄이 도착할 때까지 무한 대기
-        failsafe_triggered = False
-        wait_start = time.time()
-        while not schedule_received and is_running:
-            if not failsafe_triggered and (time.time() - wait_start) > 180:
-                print("\n🚨 [타임아웃 경고] 3분 이상 AI 서버 응답이 없습니다! 시스템 보호를 위해 하드웨어 릴레이를 강제 중지(O) 상태로 전환합니다.")
-                local_client.publish(TOPIC_CONTROL, json.dumps({"target": "B", "cmd": "O"}))
-                failsafe_triggered = True
-            time.sleep(0.1)
+        # (임시: AI 서버 응답 대기 및 경고 문구 출력 제외)
+        # while not schedule_received and is_running:
+        #     if not failsafe_triggered and (time.time() - wait_start) > 180:
+        #         print("\n🚨 [타임아웃 경고] 3분 이상 AI 서버 응답이 없습니다! 시스템 보호를 위해 하드웨어 릴레이를 강제 중지(O) 상태로 전환합니다.")
+        #         local_client.publish(TOPIC_CONTROL, json.dumps({"target": "B", "cmd": "O"}))
+        #         failsafe_triggered = True
+        #     time.sleep(0.1)
             
         if not is_running:
             break

@@ -1,0 +1,262 @@
+{
+  "stations": [
+    {
+      "header": {
+        "station_id": 0,
+        "is_physical": false,
+        "timestamp": "2026-05-12T10:42:00Z",
+        "day_idx": 0,
+        "step": 22
+      },
+      "payload": {
+        "charger_status": [
+          {
+            "charger_id": 1,
+            "has_demand": true
+          },
+          {
+            "charger_id": 2,
+            "has_demand": false
+          },
+          {
+            "charger_id": 3,
+            "has_demand": true
+          },
+          {
+            "charger_id": 4,
+            "has_demand": true
+          },
+          {
+            "charger_id": 5,
+            "has_demand": false
+          }
+        ],
+        "power_metrics_w": {
+          "p_pv": 0.4,
+          "p_load": 20.97,
+          "p_ess": 0.0,
+          "p_grid": 0.0,
+          "p_tr": 0.0
+        },
+        "state_of_charge": {
+          "mode": "idle",
+          "soc": 0.5,
+          "capacity_wh": 998.0
+        }
+      },
+      "status": {
+        "is_active": true,
+        "error_code": 0
+      }
+    },
+    {
+      "header": {
+        "station_id": 1,
+        "is_physical": false,
+        "timestamp": "2026-05-12T10:42:00Z",
+        "day_idx": 0,
+        "step": 22
+      },
+      "payload": {
+        "charger_status": [
+          {
+            "charger_id": 1,
+            "has_demand": false
+          },
+          {
+            "charger_id": 2,
+            "has_demand": false
+          },
+          {
+            "charger_id": 3,
+            "has_demand": false
+          },
+          {
+            "charger_id": 4,
+            "has_demand": false
+          },
+          {
+            "charger_id": 5,
+            "has_demand": false
+          }
+        ],
+        "power_metrics_w": {
+          "p_pv": 0.0,
+          "p_load": 0.0,
+          "p_ess": 0.0,
+          "p_grid": 0.0,
+          "p_tr": 0.0
+        },
+        "state_of_charge": {
+          "mode": "idle",
+          "soc": 0.5,
+          "capacity_wh": 998.0
+        }
+      },
+      "status": {
+        "is_active": true,
+        "error_code": 0
+      }
+    },
+    {
+      "header": {
+        "station_id": 2,
+        "is_physical": false,
+        "timestamp": "2026-05-12T10:42:00Z",
+        "day_idx": 0,
+        "step": 22
+      },
+      "payload": {
+        "charger_status": [
+          {
+            "charger_id": 1,
+            "has_demand": false
+          },
+          {
+            "charger_id": 2,
+            "has_demand": true
+          },
+          {
+            "charger_id": 3,
+            "has_demand": false
+          },
+          {
+            "charger_id": 4,
+            "has_demand": false
+          },
+          {
+            "charger_id": 5,
+            "has_demand": true
+          }
+        ],
+        "power_metrics_w": {
+          "p_pv": 0.12,
+          "p_load": 13.87,
+          "p_ess": 0.0,
+          "p_grid": 0.0,
+          "p_tr": 0.0
+        },
+        "state_of_charge": {
+          "mode": "idle",
+          "soc": 0.5,
+          "capacity_wh": 998.0
+        }
+      },
+      "status": {
+        "is_active": true,
+        "error_code": 0
+      }
+    },
+    {
+      "header": {
+        "station_id": 3,
+        "is_physical": false,
+        "timestamp": "2026-05-12T10:42:00Z",
+        "day_idx": 0,
+        "step": 22
+      },
+      "payload": {
+        "charger_status": [
+          {
+            "charger_id": 1,
+            "has_demand": false
+          },
+          {
+            "charger_id": 2,
+            "has_demand": false
+          },
+          {
+            "charger_id": 3,
+            "has_demand": false
+          },
+          {
+            "charger_id": 4,
+            "has_demand": true
+          },
+          {
+            "charger_id": 5,
+            "has_demand": false
+          }
+        ],
+        "power_metrics_w": {
+          "p_pv": 0.0,
+          "p_load": 6.9,
+          "p_ess": 0.0,
+          "p_grid": 0.0,
+          "p_tr": 0.0
+        },
+        "state_of_charge": {
+          "mode": "idle",
+          "soc": 0.5,
+          "capacity_wh": 998.0
+        }
+      },
+      "status": {
+        "is_active": true,
+        "error_code": 0
+      }
+    },
+    {
+      "header": {
+        "station_id": 4,
+        "is_physical": false,
+        "timestamp": "2026-05-12T10:42:00Z",
+        "day_idx": 0,
+        "step": 22
+      },
+      "payload": {
+        "charger_status": [
+          {
+            "charger_id": 1,
+            "has_demand": false
+          },
+          {
+            "charger_id": 2,
+            "has_demand": false
+          },
+          {
+            "charger_id": 3,
+            "has_demand": false
+          },
+          {
+            "charger_id": 4,
+            "has_demand": true
+          },
+          {
+            "charger_id": 5,
+            "has_demand": false
+          }
+        ],
+        "power_metrics_w": {
+          "p_pv": 0.0,
+          "p_load": 6.87,
+          "p_ess": 0.0,
+          "p_grid": 0.0,
+          "p_tr": 0.0
+        },
+        "state_of_charge": {
+          "mode": "idle",
+          "soc": 0.5,
+          "capacity_wh": 998.0
+        }
+      },
+      "status": {
+        "is_active": true,
+        "error_code": 0
+      }
+    }
+  ],
+  "weather": {
+    "temperature_c": 12.225,
+    "humidity_pct": 57.166,
+    "cloud_amount": 0.0,
+    "precipitation_mm": 0.0,
+    "snow_cm": 0.0,
+    "wind_speed_ms": 1.65,
+    "wind_direction_deg": 200.0,
+    "pressure_hpa": 1007.717,
+    "sea_level_pressure_hpa": 1018.017,
+    "solar_radiation_mj_m2": 0.0,
+    "current_PTY": 0.0
+  }
+}

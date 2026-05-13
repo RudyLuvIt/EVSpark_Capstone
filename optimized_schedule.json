@@ -1,0 +1,933 @@
+{
+  "station_day_ahead_schedule": [
+    {
+      "station_id": 0,
+      "hourly_plan": [
+        {
+          "hour": 0,
+          "ess_mode": "charge",
+          "ess_power_kw": 40.0,
+          "grid_usage_kw": 49.490484,
+          "transfer": []
+        },
+        {
+          "hour": 1,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 9.490484,
+          "transfer": []
+        },
+        {
+          "hour": 2,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 8.668036,
+          "transfer": []
+        },
+        {
+          "hour": 3,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 7.505328,
+          "transfer": []
+        },
+        {
+          "hour": 4,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 7.241287,
+          "transfer": []
+        },
+        {
+          "hour": 5,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 7.101474,
+          "transfer": []
+        },
+        {
+          "hour": 6,
+          "ess_mode": "discharge",
+          "ess_power_kw": 1.003626,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        },
+        {
+          "hour": 7,
+          "ess_mode": "charge",
+          "ess_power_kw": 1.112051,
+          "grid_usage_kw": 0.0,
+          "transfer": [
+            {
+              "target_station_id": 1,
+              "transfer_power_kw": 0.4132
+            }
+          ]
+        },
+        {
+          "hour": 8,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 0.0,
+          "transfer": [
+            {
+              "target_station_id": 2,
+              "transfer_power_kw": 5.729698
+            }
+          ]
+        },
+        {
+          "hour": 9,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        },
+        {
+          "hour": 10,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        },
+        {
+          "hour": 11,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        },
+        {
+          "hour": 12,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 0.0,
+          "transfer": [
+            {
+              "target_station_id": 2,
+              "transfer_power_kw": 18.492231
+            }
+          ]
+        },
+        {
+          "hour": 13,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 0.0,
+          "transfer": [
+            {
+              "target_station_id": 2,
+              "transfer_power_kw": 10.202959
+            }
+          ]
+        },
+        {
+          "hour": 14,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 0.0,
+          "transfer": [
+            {
+              "target_station_id": 2,
+              "transfer_power_kw": 12.113745
+            }
+          ]
+        },
+        {
+          "hour": 15,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 0.0,
+          "transfer": [
+            {
+              "target_station_id": 2,
+              "transfer_power_kw": 14.057277
+            }
+          ]
+        },
+        {
+          "hour": 16,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 0.0,
+          "transfer": [
+            {
+              "target_station_id": 1,
+              "transfer_power_kw": 0.529119
+            }
+          ]
+        },
+        {
+          "hour": 17,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 0.0,
+          "transfer": [
+            {
+              "target_station_id": 1,
+              "transfer_power_kw": 1.268703
+            },
+            {
+              "target_station_id": 4,
+              "transfer_power_kw": 0.639028
+            }
+          ]
+        },
+        {
+          "hour": 18,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 0.091878,
+          "transfer": []
+        },
+        {
+          "hour": 19,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 5.471873,
+          "transfer": []
+        },
+        {
+          "hour": 20,
+          "ess_mode": "discharge",
+          "ess_power_kw": 11.0731,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        },
+        {
+          "hour": 21,
+          "ess_mode": "discharge",
+          "ess_power_kw": 11.321348,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        },
+        {
+          "hour": 22,
+          "ess_mode": "discharge",
+          "ess_power_kw": 10.970038,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        },
+        {
+          "hour": 23,
+          "ess_mode": "discharge",
+          "ess_power_kw": 10.970038,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        }
+      ]
+    },
+    {
+      "station_id": 1,
+      "hourly_plan": [
+        {
+          "hour": 0,
+          "ess_mode": "discharge",
+          "ess_power_kw": 3.068423,
+          "grid_usage_kw": 9.157165,
+          "transfer": []
+        },
+        {
+          "hour": 1,
+          "ess_mode": "discharge",
+          "ess_power_kw": 12.225588,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        },
+        {
+          "hour": 2,
+          "ess_mode": "charge",
+          "ess_power_kw": 4.870838,
+          "grid_usage_kw": 16.763721,
+          "transfer": []
+        },
+        {
+          "hour": 3,
+          "ess_mode": "charge",
+          "ess_power_kw": 35.789859,
+          "grid_usage_kw": 47.271185,
+          "transfer": []
+        },
+        {
+          "hour": 4,
+          "ess_mode": "charge",
+          "ess_power_kw": 16.285575,
+          "grid_usage_kw": 27.766902,
+          "transfer": []
+        },
+        {
+          "hour": 5,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 11.609459,
+          "transfer": []
+        },
+        {
+          "hour": 6,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 5.511611,
+          "transfer": []
+        },
+        {
+          "hour": 7,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 0.087777,
+          "transfer": []
+        },
+        {
+          "hour": 8,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        },
+        {
+          "hour": 9,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        },
+        {
+          "hour": 10,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        },
+        {
+          "hour": 11,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        },
+        {
+          "hour": 12,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 0.0,
+          "transfer": [
+            {
+              "target_station_id": 2,
+              "transfer_power_kw": 7.064948
+            }
+          ]
+        },
+        {
+          "hour": 13,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        },
+        {
+          "hour": 14,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        },
+        {
+          "hour": 15,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 0.0,
+          "transfer": [
+            {
+              "target_station_id": 2,
+              "transfer_power_kw": 0.325725
+            }
+          ]
+        },
+        {
+          "hour": 16,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        },
+        {
+          "hour": 17,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        },
+        {
+          "hour": 18,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 4.985444,
+          "transfer": []
+        },
+        {
+          "hour": 19,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 9.336948,
+          "transfer": []
+        },
+        {
+          "hour": 20,
+          "ess_mode": "discharge",
+          "ess_power_kw": 15.369084,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        },
+        {
+          "hour": 21,
+          "ess_mode": "discharge",
+          "ess_power_kw": 15.270623,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        },
+        {
+          "hour": 22,
+          "ess_mode": "discharge",
+          "ess_power_kw": 15.073787,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        },
+        {
+          "hour": 23,
+          "ess_mode": "discharge",
+          "ess_power_kw": 14.944359,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        }
+      ]
+    },
+    {
+      "station_id": 2,
+      "hourly_plan": [
+        {
+          "hour": 0,
+          "ess_mode": "discharge",
+          "ess_power_kw": 9.25033,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        },
+        {
+          "hour": 1,
+          "ess_mode": "discharge",
+          "ess_power_kw": 9.821709,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        },
+        {
+          "hour": 2,
+          "ess_mode": "charge",
+          "ess_power_kw": 15.025806,
+          "grid_usage_kw": 24.847515,
+          "transfer": []
+        },
+        {
+          "hour": 3,
+          "ess_mode": "charge",
+          "ess_power_kw": 22.050899,
+          "grid_usage_kw": 30.32581,
+          "transfer": []
+        },
+        {
+          "hour": 4,
+          "ess_mode": "charge",
+          "ess_power_kw": 11.55166,
+          "grid_usage_kw": 19.73347,
+          "transfer": []
+        },
+        {
+          "hour": 5,
+          "ess_mode": "charge",
+          "ess_power_kw": 12.504086,
+          "grid_usage_kw": 20.6846,
+          "transfer": []
+        },
+        {
+          "hour": 6,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 16.77188,
+          "transfer": []
+        },
+        {
+          "hour": 7,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 16.611881,
+          "transfer": []
+        },
+        {
+          "hour": 8,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        },
+        {
+          "hour": 9,
+          "ess_mode": "discharge",
+          "ess_power_kw": 6.819603,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        },
+        {
+          "hour": 10,
+          "ess_mode": "discharge",
+          "ess_power_kw": 5.663899,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        },
+        {
+          "hour": 11,
+          "ess_mode": "discharge",
+          "ess_power_kw": 4.025251,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        },
+        {
+          "hour": 12,
+          "ess_mode": "charge",
+          "ess_power_kw": 18.292246,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        },
+        {
+          "hour": 13,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        },
+        {
+          "hour": 14,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        },
+        {
+          "hour": 15,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        },
+        {
+          "hour": 16,
+          "ess_mode": "discharge",
+          "ess_power_kw": 17.433814,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        },
+        {
+          "hour": 17,
+          "ess_mode": "discharge",
+          "ess_power_kw": 18.522049,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        },
+        {
+          "hour": 18,
+          "ess_mode": "discharge",
+          "ess_power_kw": 8.988944,
+          "grid_usage_kw": 13.096204,
+          "transfer": []
+        },
+        {
+          "hour": 19,
+          "ess_mode": "discharge",
+          "ess_power_kw": 15.633225,
+          "grid_usage_kw": 11.089904,
+          "transfer": []
+        },
+        {
+          "hour": 20,
+          "ess_mode": "charge",
+          "ess_power_kw": 20.05586,
+          "grid_usage_kw": 51.538849,
+          "transfer": []
+        },
+        {
+          "hour": 21,
+          "ess_mode": "discharge",
+          "ess_power_kw": 7.831934,
+          "grid_usage_kw": 23.373113,
+          "transfer": []
+        },
+        {
+          "hour": 22,
+          "ess_mode": "discharge",
+          "ess_power_kw": 21.841058,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        },
+        {
+          "hour": 23,
+          "ess_mode": "discharge",
+          "ess_power_kw": 3.849389,
+          "grid_usage_kw": 14.438758,
+          "transfer": []
+        }
+      ]
+    },
+    {
+      "station_id": 3,
+      "hourly_plan": [
+        {
+          "hour": 0,
+          "ess_mode": "charge",
+          "ess_power_kw": 40.0,
+          "grid_usage_kw": 49.38308,
+          "transfer": []
+        },
+        {
+          "hour": 1,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 9.38308,
+          "transfer": []
+        },
+        {
+          "hour": 2,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 8.522481,
+          "transfer": []
+        },
+        {
+          "hour": 3,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 7.206141,
+          "transfer": []
+        },
+        {
+          "hour": 4,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 6.9421,
+          "transfer": []
+        },
+        {
+          "hour": 5,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 6.817116,
+          "transfer": []
+        },
+        {
+          "hour": 6,
+          "ess_mode": "discharge",
+          "ess_power_kw": 0.719268,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        },
+        {
+          "hour": 7,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 0.0,
+          "transfer": [
+            {
+              "target_station_id": 1,
+              "transfer_power_kw": 2.419018
+            }
+          ]
+        },
+        {
+          "hour": 8,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        },
+        {
+          "hour": 9,
+          "ess_mode": "charge",
+          "ess_power_kw": 0.796973,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        },
+        {
+          "hour": 10,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        },
+        {
+          "hour": 11,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        },
+        {
+          "hour": 12,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        },
+        {
+          "hour": 13,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        },
+        {
+          "hour": 14,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        },
+        {
+          "hour": 15,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        },
+        {
+          "hour": 16,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        },
+        {
+          "hour": 17,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        },
+        {
+          "hour": 18,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 0.0,
+          "transfer": [
+            {
+              "target_station_id": 0,
+              "transfer_power_kw": 0.19359
+            }
+          ]
+        },
+        {
+          "hour": 19,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 4.868978,
+          "transfer": []
+        },
+        {
+          "hour": 20,
+          "ess_mode": "discharge",
+          "ess_power_kw": 10.188403,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        },
+        {
+          "hour": 21,
+          "ess_mode": "charge",
+          "ess_power_kw": 3.225833,
+          "grid_usage_kw": 13.401987,
+          "transfer": []
+        },
+        {
+          "hour": 22,
+          "ess_mode": "discharge",
+          "ess_power_kw": 10.262563,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        },
+        {
+          "hour": 23,
+          "ess_mode": "discharge",
+          "ess_power_kw": 10.148437,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        }
+      ]
+    },
+    {
+      "station_id": 4,
+      "hourly_plan": [
+        {
+          "hour": 0,
+          "ess_mode": "charge",
+          "ess_power_kw": 28.614986,
+          "grid_usage_kw": 38.747354,
+          "transfer": []
+        },
+        {
+          "hour": 1,
+          "ess_mode": "charge",
+          "ess_power_kw": 11.385014,
+          "grid_usage_kw": 21.517383,
+          "transfer": []
+        },
+        {
+          "hour": 2,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 9.073541,
+          "transfer": []
+        },
+        {
+          "hour": 3,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 7.872883,
+          "transfer": []
+        },
+        {
+          "hour": 4,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 7.800251,
+          "transfer": []
+        },
+        {
+          "hour": 5,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 7.798956,
+          "transfer": []
+        },
+        {
+          "hour": 6,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 1.701108,
+          "transfer": []
+        },
+        {
+          "hour": 7,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 0.12714,
+          "transfer": []
+        },
+        {
+          "hour": 8,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        },
+        {
+          "hour": 9,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        },
+        {
+          "hour": 10,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        },
+        {
+          "hour": 11,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        },
+        {
+          "hour": 12,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        },
+        {
+          "hour": 13,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        },
+        {
+          "hour": 14,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        },
+        {
+          "hour": 15,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        },
+        {
+          "hour": 16,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        },
+        {
+          "hour": 17,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        },
+        {
+          "hour": 18,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 4.559948,
+          "transfer": []
+        },
+        {
+          "hour": 19,
+          "ess_mode": "idle",
+          "ess_power_kw": 0.0,
+          "grid_usage_kw": 9.130255,
+          "transfer": []
+        },
+        {
+          "hour": 20,
+          "ess_mode": "discharge",
+          "ess_power_kw": 15.381033,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        },
+        {
+          "hour": 21,
+          "ess_mode": "discharge",
+          "ess_power_kw": 15.54005,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        },
+        {
+          "hour": 22,
+          "ess_mode": "charge",
+          "ess_power_kw": 1.937401,
+          "grid_usage_kw": 16.663652,
+          "transfer": []
+        },
+        {
+          "hour": 23,
+          "ess_mode": "discharge",
+          "ess_power_kw": 14.744431,
+          "grid_usage_kw": 0.0,
+          "transfer": []
+        }
+      ]
+    }
+  ]
+}

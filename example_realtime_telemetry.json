@@ -1,0 +1,187 @@
+{
+    "stations": [
+        {
+            "header": {
+                "station_id": 0,
+                "is_physical": false,
+                "timestamp": "2026-05-09T10:41:19Z",
+                "day_idx": 0,
+                "step": 14
+            },
+            "payload": {
+                "charger_status": [
+                    {"charger_id": 1, "has_demand": true},
+                    {"charger_id": 2, "has_demand": false},
+                    {"charger_id": 3, "has_demand": false},
+                    {"charger_id": 4, "has_demand": false},
+                    {"charger_id": 5, "has_demand": false}
+                ],
+                "power_metrics_w": {
+                    "p_pv": 2500.5,
+                    "p_load": 7000.0,
+                    "p_ess": 4500.0,
+                    "p_grid": 0.0,
+                    "p_tr": -5.0
+                },
+                "state_of_charge": {
+                    "mode": "discharge",
+                    "soc": 0.4500,
+                    "capacity_wh": 998000.0
+                }
+            },
+            "status": {
+                "is_active": true,
+                "error_code": 0
+            }
+        },
+        {
+            "header": {
+                "station_id": 1,
+                "is_physical": false,
+                "timestamp": "2026-05-09T10:41:19Z",
+                "day_idx": 0,
+                "step": 14
+            },
+            "payload": {
+                "charger_status": [
+                    {"charger_id": 1, "has_demand": false},
+                    {"charger_id": 2, "has_demand": false},
+                    {"charger_id": 3, "has_demand": false},
+                    {"charger_id": 4, "has_demand": false},
+                    {"charger_id": 5, "has_demand": false}
+                ],
+                "power_metrics_w": {
+                    "p_pv": 3000.0,
+                    "p_load": 0.0,
+                    "p_ess": -3000.0,
+                    "p_grid": 0.0,
+                    "p_tr": 0.0
+                },
+                "state_of_charge": {
+                    "mode": "charge",
+                    "soc": 0.6000,
+                    "capacity_wh": 998000.0
+                }
+            },
+            "status": {
+                "is_active": true,
+                "error_code": 0
+            }
+        },
+        {
+            "header": {
+                "station_id": 2,
+                "is_physical": false,
+                "timestamp": "2026-05-09T10:41:19Z",
+                "day_idx": 0,
+                "step": 14
+            },
+            "payload": {
+                "charger_status": [
+                    {"charger_id": 1, "has_demand": true},
+                    {"charger_id": 2, "has_demand": true},
+                    {"charger_id": 3, "has_demand": false},
+                    {"charger_id": 4, "has_demand": false},
+                    {"charger_id": 5, "has_demand": false}
+                ],
+                "power_metrics_w": {
+                    "p_pv": 1500.0,
+                    "p_load": 14000.0,
+                    "p_ess": 0.0,
+                    "p_grid": 12500.0,
+                    "p_tr": 0.0
+                },
+                "state_of_charge": {
+                    "mode": "idle",
+                    "soc": 0.2000,
+                    "capacity_wh": 998000.0
+                }
+            },
+            "status": {
+                "is_active": true,
+                "error_code": 0
+            }
+        },
+        {
+            "header": {
+                "station_id": 3,
+                "is_physical": false,
+                "timestamp": "2026-05-09T10:41:19Z",
+                "day_idx": 0,
+                "step": 14
+            },
+            "payload": {
+                "charger_status": [
+                    {"charger_id": 1, "has_demand": false},
+                    {"charger_id": 2, "has_demand": false},
+                    {"charger_id": 3, "has_demand": false},
+                    {"charger_id": 4, "has_demand": false},
+                    {"charger_id": 5, "has_demand": false}
+                ],
+                "power_metrics_w": {
+                    "p_pv": 2000.0,
+                    "p_load": 0.0,
+                    "p_ess": 0.0,
+                    "p_grid": -2000.0,
+                    "p_tr": 0.0
+                },
+                "state_of_charge": {
+                    "mode": "idle",
+                    "soc": 0.8500,
+                    "capacity_wh": 998000.0
+                }
+            },
+            "status": {
+                "is_active": true,
+                "error_code": 0
+            }
+        },
+        {
+            "header": {
+                "station_id": 4,
+                "is_physical": false,
+                "timestamp": "2026-05-09T10:41:19Z",
+                "day_idx": 0,
+                "step": 14
+            },
+            "payload": {
+                "charger_status": [
+                    {"charger_id": 1, "has_demand": true},
+                    {"charger_id": 2, "has_demand": true},
+                    {"charger_id": 3, "has_demand": true},
+                    {"charger_id": 4, "has_demand": false},
+                    {"charger_id": 5, "has_demand": false}
+                ],
+                "power_metrics_w": {
+                    "p_pv": 0.0,
+                    "p_load": 21000.0,
+                    "p_ess": 10000.0,
+                    "p_grid": 11000.0,
+                    "p_tr": 0.0
+                },
+                "state_of_charge": {
+                    "mode": "discharge",
+                    "soc": 0.7000,
+                    "capacity_wh": 998000.0
+                }
+            },
+            "status": {
+                "is_active": true,
+                "error_code": 0
+            }
+        }
+    ],
+    "weather": {
+        "temperature_c": 13.875,
+        "humidity_pct": 96.501,
+        "cloud_amount": 10.0,
+        "precipitation_mm": 0.925,
+        "snow_cm": 0.0,
+        "wind_speed_ms": 2.725,
+        "wind_direction_deg": 290.0,
+        "pressure_hpa": 994.917,
+        "sea_level_pressure_hpa": 1005.017,
+        "solar_radiation_mj_m2": 0.0,
+        "current_PTY": 1.0
+    }
+}

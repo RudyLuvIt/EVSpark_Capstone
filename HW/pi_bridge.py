@@ -11,7 +11,7 @@ PORT_A = '/dev/ttyUSB0'  # 위쪽 아두이노 (부하 3, 4, 5)
 PORT_B = '/dev/ttyUSB1'  # 아래쪽 아두이노 (부하 1, 2)
 BAUD_RATE = 9600
 
-MQTT_BROKER = "192.168.219.114"  # ⚠️ 실제 MQTT 서버(또는 AI 서버)의 IP 주소로 변경!
+MQTT_BROKER = "100.90.73.122"  # ⚠️ 실제 MQTT 서버(또는 AI 서버)의 IP 주소로 변경!
 MQTT_PORT = 1883
 TOPIC_CONTROL = "smartgrid/control" # 명령을 받을 토픽
 TOPIC_SENSOR = "smartgrid/sensor"   # 센서값을 보낼 토픽
@@ -30,7 +30,7 @@ time.sleep(2)
 # ==========================================
 # 3. MQTT 통신 설정 및 제어 로직
 # ==========================================
-def on_connect(client, userdata, flags, rc):
+def on_connect(client, userdata, flags, rc, properties=None):
     print(f"✅ MQTT 서버 연결 성공! (코드: {rc})")
     client.subscribe(TOPIC_CONTROL) # 제어 명령 토픽 구독 시작
     print(f"📡 '{TOPIC_CONTROL}' 토픽에서 AI의 스케줄링 명령을 기다립니다...")
@@ -46,7 +46,7 @@ def on_message(client, userdata, msg):
         target = data.get("target")
         cmd = data.get("cmd")
 
-        if cmd in ['B', 'R', 'O']:
+        if cmd in ['B', 'R', 'G', 'O']:
             if target == 'A' and ser_A:
                 ser_A.write(cmd.encode('utf-8'))
                 print(f"⚡ [명령 수신] 위쪽(A) 아두이노 릴레이 작동 -> '{cmd}'")
@@ -59,7 +59,10 @@ def on_message(client, userdata, msg):
         print(f"❌ JSON 형식이 아닙니다: {payload}")
 
 # MQTT 클라이언트 생성 및 콜백 함수 연결
-client = mqtt.Client()
+try:
+    client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
+except AttributeError:
+    client = mqtt.Client()
 client.on_connect = on_connect
 client.on_message = on_message
 
